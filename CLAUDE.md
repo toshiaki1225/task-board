@@ -1,24 +1,26 @@
 # task-board
 
-タスク管理アプリ。HTML/CSS/JavaScriptのみで構成されたフロントエンド完結型のWebアプリケーション。
+タスク管理アプリ。React + Vite で構成されたフロントエンドWebアプリケーション。
 
 ## 技術スタック
 
-- **HTML** — マークアップ・構造
-- **CSS** — スタイリング・アニメーション
-- **JavaScript** — タスク管理ロジック・DOM操作（バニラJS、フレームワーク不使用）
+- **React 18** — UIコンポーネント・状態管理
+- **Vite 6** — ビルドツール・開発サーバー
+- **CSS** — スタイリング（CSSモジュール不使用、通常のCSSファイル）
 
 ## プロジェクト構成
 
 ```
 task-board/
-├── index.html       # エントリーポイント
-├── css/
-│   └── style.css    # スタイルシート
-├── js/
-│   └── app.js       # アプリケーションロジック
-└── data/
-    └── tasks.js     # タスクデータ（初期値・定数など）
+├── index.html          # エントリーポイント
+├── package.json        # 依存関係・スクリプト定義
+├── vite.config.js      # Vite設定
+├── .gitignore
+└── src/
+    ├── main.jsx        # Reactルート・マウント処理
+    ├── App.jsx         # メインコンポーネント（タスクロジック）
+    ├── App.css         # コンポーネントスタイル
+    └── index.css       # グローバルスタイル
 ```
 
 ## 開発ガイドライン
@@ -26,25 +28,33 @@ task-board/
 ### コーディング規約
 - JavaScriptはES6+構文を使用する（`const`/`let`、アロー関数、テンプレートリテラル等）
 - `var`は使用しない
-- DOMの取得は `document.querySelector` / `document.querySelectorAll` を使用する
-- 外部ライブラリ・フレームワークは導入しない
+- Reactの状態管理は `useState` を使用する
+- コンポーネントは関数コンポーネントで記述する（クラスコンポーネント不使用）
 
 ### 命名規則
-- 変数・関数名：キャメルケース（例：`currentTask`、`addNewTask`）
-- CSSクラス名：ケバブケース（例：`task-card`、`add-btn`）
+- コンポーネント名：パスカルケース（例：`App`、`TaskItem`）
+- 変数・関数名：キャメルケース（例：`taskList`、`addTask`）
+- CSSクラス名：ケバブケース（例：`task-item`、`add-btn`）
 - 定数：アッパースネークケース（例：`MAX_TASKS`）
 
 ### スタイル
 - レスポンシブデザインを前提とする（モバイルファースト）
 - CSSカスタムプロパティ（変数）を活用して色・サイズを管理する
 
-## 動作確認
+## 開発コマンド
 
-サーバー不要。`index.html` をブラウザで直接開けば動作する。
+```bash
+# 依存関係のインストール
+npm install
 
-```
-# ブラウザで開く（例）
-start index.html
+# 開発サーバー起動（ http://localhost:5173 で確認）
+npm run dev
+
+# プロダクションビルド
+npm run build
+
+# ビルド結果のプレビュー
+npm run preview
 ```
 
 ## Git 運用ルール
@@ -69,5 +79,5 @@ https://github.com/toshiaki1225/task-board
 ## 注意事項
 
 - バックエンド・サーバーサイド処理は一切持たない
-- タスクデータは `localStorage` を使ってブラウザに保存する
-- `localStorage` を使う際はブラウザ互換性に注意する
+- `node_modules/` と `dist/` はGit管理外（.gitignore で除外済み）
+- データはページリロードでリセットされる（永続化が必要な場合は `localStorage` を使う）
