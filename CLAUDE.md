@@ -4,9 +4,13 @@
 
 ## 技術スタック
 
-- **React 18** — UIコンポーネント・状態管理
-- **Vite 6** — ビルドツール・開発サーバー
-- **CSS** — スタイリング（CSSモジュール不使用、通常のCSSファイル）
+| 技術 | バージョン | 用途 |
+|---|---|---|
+| React | 18.x | UIコンポーネント・状態管理（useState / useEffect） |
+| Vite | 6.x | ビルドツール・開発サーバー |
+| CSS | — | スタイリング（CSSモジュール不使用、通常のCSSファイル） |
+| localStorage | — | タスクデータの永続化 |
+| GitHub Actions | — | CI/CD・GitHub Pagesへの自動デプロイ |
 
 ## プロジェクト構成
 
@@ -32,10 +36,16 @@ task-board/
 - コンポーネントは関数コンポーネントで記述する（クラスコンポーネント不使用）
 
 ### 命名規則
-- コンポーネント名：パスカルケース（例：`App`、`TaskItem`）
-- 変数・関数名：キャメルケース（例：`taskList`、`addTask`）
-- CSSクラス名：ケバブケース（例：`task-item`、`add-btn`）
-- 定数：アッパースネークケース（例：`MAX_TASKS`）
+
+| 対象 | 規則 | 例 |
+|---|---|---|
+| コンポーネント名 | パスカルケース | `App`、`TaskItem`、`TaskList` |
+| ファイル名（コンポーネント） | パスカルケース | `App.jsx`、`TaskItem.jsx` |
+| 変数・関数名 | キャメルケース | `taskList`、`addTask`、`toggleTask` |
+| イベントハンドラ | `handle` プレフィックス | `handleKeyDown`、`handleSubmit` |
+| CSSクラス名 | ケバブケース | `task-item`、`add-btn`、`delete-btn` |
+| localStorageキー | ケバブケース定数 | `STORAGE_KEY = 'task-board-tasks'` |
+| 定数 | アッパースネークケース | `MAX_TASKS`、`STORAGE_KEY` |
 
 ### スタイル
 - レスポンシブデザインを前提とする（モバイルファースト）
@@ -75,6 +85,13 @@ git push origin main
 ## GitHubリポジトリ
 
 https://github.com/toshiaki1225/task-board
+
+## デプロイ先
+
+https://toshiaki1225.github.io/task-board/
+
+`main` ブランチへのプッシュをトリガーに、GitHub Actions が自動でビルド・デプロイする。
+設定ファイル：`.github/workflows/deploy.yml`
 
 ## 注意事項
 
